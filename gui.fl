@@ -5,16 +5,28 @@ code_name {.cxx}
 decl {\#include "encrypt.h"} {private local
 }
 
+decl {\#include <FL/Fl_PNG_Image.H>} {selected private local
+}
+
+decl {\#include <FL/fl_ask.H>} {private local
+}
+
 decl {Fl_Text_Buffer *gpg_buf;} {private local
 }
 
 decl {Fl_Text_Buffer *message_buf;} {private local
 }
 
+data png_icon {private local filename {gpg_message.png}
+}
+
 Function {make_window()} {open C
 } {
-  Fl_Window {} {open
-    xywh {724 314 440 490} type Double hide
+  Fl_Window win_main {
+    label {GPG Message} open
+    xywh {1313 428 440 490} type Double
+    code0 {Fl_PNG_Image *icon = new Fl_PNG_Image(NULL, png_icon, sizeof(png_icon));}
+    code1 {win_main->icon(icon);} visible
   } {
     Fl_Text_Editor gpg_key_text {
       label {GPG key:}
@@ -31,17 +43,31 @@ Function {make_window()} {open C
     Fl_Button encrypt_button {
       label Encrypt
       callback {char *gpg = gpg_buf->text();
+
+if (strlen(gpg) == 0) {
+	fl_message("Empty GPG key!");
+	free(gpg);
+	return;
+}
+
 char *msg = message_buf->text();
+if (strlen(msg) == 0) {
+	fl_message("Empty message!");
+	free(msg);
+	return;
+}
 
 char *out = encrypt(gpg, msg);
 
 if (out) {
 	Fl::copy(out, strlen(out), 1);
 	free(out);
+} else {
+	fl_message("Encryption error! Check the PGP key!");
 }
 
 free(gpg);
-free(msg);} selected
+free(msg);}
       xywh {160 450 120 30}
     }
   }

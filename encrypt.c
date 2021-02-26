@@ -142,6 +142,8 @@ char *encrypt(char *gpg_text, char *msg_text)
 	return NULL;
     }
 
+//    gpgme_set_passphrase_cb (ctx, passphrase_cb, NULL);
+
     err = gpgme_op_import(ctx, in);
     if (err) {
 	fprintf(stderr, "%s:%d: %s: %s\n",
@@ -155,7 +157,9 @@ char *encrypt(char *gpg_text, char *msg_text)
 
     import_result = gpgme_op_import_result(ctx);
 
-    fprintf(stderr, "fpr [%s]\n", import_result->imports->fpr);
+    if(import_result->considered == 0) {
+	goto exit;
+    }
 
     gpgme_data_release(in);
 
@@ -179,8 +183,6 @@ char *encrypt(char *gpg_text, char *msg_text)
 	gpgme_release(ctx);
 	return NULL;
     }
-
-    gpgme_set_passphrase_cb (ctx, passphrase_cb, NULL);
 
     err = gpgme_get_key(ctx, import_result->imports->fpr, &key[0], 0);
     if (err) {
@@ -210,10 +212,13 @@ char *encrypt(char *gpg_text, char *msg_text)
 	}
     }
 
-    err = gpgme_op_delete (ctx, key[0], 1);
-    gpgme_key_unref(key[0]);
-    gpgme_data_release (in);
+    if (import_result->imported > 0) {
+	err = gpgme_op_delete (ctx, key[0], 1);
+	gpgme_key_unref(key[0]);
+    }
     gpgme_data_release (out);
+exit:
+    gpgme_data_release (in);
     gpgme_release (ctx);
 
     return ret;

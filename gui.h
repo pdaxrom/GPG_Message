@@ -4,6 +4,7 @@
 #define gui_h
 #include <FL/Fl.H>
 #include <FL/Fl_Double_Window.H>
+extern Fl_Double_Window *win_main;
 #include <FL/Fl_Text_Editor.H>
 extern Fl_Text_Editor *gpg_key_text;
 extern Fl_Text_Editor *message_text;

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=@VERSION@
+Name=Gpg Message
+Comment=Gpg Message
+Exec=gpg_message
+Icon=gpg_message.svg
+Terminal=false
+Type=Application
+Categories=Network;

@@ -1,0 +1,36 @@
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>English</string>
+    <key>CFBundleDisplayName</key>
+    <string>Gpg Message</string>
+    <key>CFBundleExecutable</key>
+    <string>gpg_message</string>
+    <key>CFBundleIconFile</key>
+    <string>gpg_message.icns</string>
+    <key>CFBundleIdentifier</key>
+    <string>gpg_message</string>
+    <!-- TODO: Fix this in v2.0 //-->
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>Gpg Message</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleSignature</key>
+    <string>hiti</string>
+    <key>CFBundleShortVersionString</key>
+    <string>@VERSION@</string>
+    <key>CFBundleVersion</key>
+    <string>@VERSION@</string>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+    <key>NSHighResolutionCapable</key>
+    <string>True</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>© 2021, GPG Message Corp.</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>10.9.0</string>
+  </dict>
+</plist>

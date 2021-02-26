@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "encrypt.h"} {private local
+}
+
 decl {Fl_Text_Buffer *gpg_buf;} {private local
 }
 
@@ -11,7 +14,7 @@ decl {Fl_Text_Buffer *message_buf;} {private local
 Function {make_window()} {open C
 } {
   Fl_Window {} {open
-    xywh {724 314 440 490} type Double visible
+    xywh {724 314 440 490} type Double hide
   } {
     Fl_Text_Editor gpg_key_text {
       label {GPG key:}
@@ -20,13 +23,25 @@ Function {make_window()} {open C
       code1 {gpg_key_text->buffer(gpg_buf);}
     }
     Fl_Text_Editor message_text {
-      label {Message:} selected
+      label {Message:}
       xywh {5 245 430 200}
       code0 {message_buf = new Fl_Text_Buffer();}
       code1 {message_text->buffer(message_buf);}
     }
     Fl_Button encrypt_button {
       label Encrypt
+      callback {char *gpg = gpg_buf->text();
+char *msg = message_buf->text();
+
+char *out = encrypt(gpg, msg);
+
+if (out) {
+	Fl::copy(out, strlen(out), 1);
+	free(out);
+}
+
+free(gpg);
+free(msg);} selected
       xywh {160 450 120 30}
     }
   }

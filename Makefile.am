@@ -4,7 +4,7 @@ LIBS = $(GPG_MESSAGE_LIBS)
 
 bin_PROGRAMS = gpg_message
 
-gpg_message_SOURCES = gui.cxx main.cxx
+gpg_message_SOURCES = gui.cxx main.cxx encrypt.c
 
 if TARGET_LINUX
 LINUXDEPLOY = linuxdeploy-devbuild-$(SYSTEM_ARCH).AppImage

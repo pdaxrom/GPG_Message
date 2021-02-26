@@ -2,18 +2,28 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {Fl_Text_Buffer *gpg_buf;} {private local
+}
+
+decl {Fl_Text_Buffer *message_buf;} {private local
+}
+
 Function {make_window()} {open C
 } {
   Fl_Window {} {open
     xywh {724 314 440 490} type Double visible
   } {
     Fl_Text_Editor gpg_key_text {
-      label {GPG key:} selected
-      private xywh {5 25 430 195}
+      label {GPG key:}
+      xywh {5 25 430 200}
+      code0 {gpg_buf = new Fl_Text_Buffer();}
+      code1 {gpg_key_text->buffer(gpg_buf);}
     }
     Fl_Text_Editor message_text {
-      label {Message:}
-      private xywh {5 245 430 195}
+      label {Message:} selected
+      xywh {5 245 430 200}
+      code0 {message_buf = new Fl_Text_Buffer();}
+      code1 {message_text->buffer(message_buf);}
     }
     Fl_Button encrypt_button {
       label Encrypt

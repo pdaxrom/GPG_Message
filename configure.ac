@@ -11,16 +11,16 @@ AC_CHECK_PROGS([RC],[${ac_tool_prefix}windres])
 
 AC_PATH_PROG([PKG_CONFIG], [pkg-config])
 
-PKG_CHECK_MODULES_STATIC(GPG_MESSAGE, pgpme)
+PKG_CHECK_MODULES(GPG_MESSAGE, gpgme)
 
 FLTK_INCLUDE=""
 FLTK_LIB=""
-#FLTK_INCLUDE="$(${FLTK_DIR}fltk-config --use-images --cxxflags)"
-#FLTK_LIB="$(${FLTK_DIR}fltk-config --use-images --ldstaticflags)"
+FLTK_INCLUDE="$(${FLTK_DIR}fltk-config --use-images --cxxflags)"
+FLTK_LIB="$(${FLTK_DIR}fltk-config --use-images --ldstaticflags)"
 
-#if test "$FLTK_LIB" = ""; then
-#    AC_MSG_ERROR([fltk-config not found])
-#fi
+if test "$FLTK_LIB" = ""; then
+    AC_MSG_ERROR([fltk-config not found])
+fi
 
 ADDONS_LIBS=""
 

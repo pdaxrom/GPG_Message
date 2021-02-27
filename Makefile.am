@@ -16,7 +16,6 @@ $(HOME)/bin/$(LINUXDEPLOY):
 
 GPG_Message-$(VERSION)-$(SYSTEM_ARCH).AppImage: $(HOME)/bin/$(LINUXDEPLOY)
 	-chrpath -c gpg_message
-#	convert $(top_srcdir)/hopscotch_logo_RGB_symbol_only.png -resize 256x256\> hopscotch_logo_RGB_symbol_only.png
 	VERSION=$(VERSION) $(HOME)/bin/$(LINUXDEPLOY)	\
 	    --appdir AppDir				\
 	    -e gpg_message				\
